@@ -1,5 +1,6 @@
 <html>
   <head>
+    {{ faviconHtml }}
     <title>{{ name }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./main.css">
@@ -10,7 +11,7 @@
       <div class="container">
         <img class="profile-picture" src="{{ profilePicture }}">
         <div class="name">{{ name }}</div>
-        {{ links }}
+        {{ linksHtml }}
       </div>
     </div>
   </body>

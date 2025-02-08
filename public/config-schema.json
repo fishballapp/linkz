@@ -14,6 +14,10 @@
       "type": "string",
       "description": "Path to the output directory."
     },
+    "favicon": {
+      "type": "string",
+      "description": "URL or path to the favicon. (Note: path would be relative from `publicDir`)"
+    },
     "profilePicture": {
       "type": "string",
       "description": "URL or path to the profile picture. (Note: path would be relative from `publicDir`)"

@@ -2,6 +2,7 @@
 export type Config = {
   outDir: string;
   publicDir?: string;
+  favicon?: string;
   profilePicture: string;
   name: string;
   links: {

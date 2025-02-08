@@ -1,4 +1,8 @@
-export const fetchAsText = async (url: string): Promise<string> => {
+export const fetchAsText = async (
+  url: string,
+  { trim = false }: { trim?: boolean } = {},
+): Promise<string> => {
   const res = await fetch(url);
-  return await res.text();
+  const text = await res.text();
+  return trim ? text.trim() : text;
 };

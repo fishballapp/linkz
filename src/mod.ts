@@ -65,9 +65,16 @@ const config = await getConfig(configFilePath);
 const distDir = `${dirname(configFilePath)}/dist`;
 await ensureDistOk(distDir, { isForce });
 
-const [indexHtml, linkPartial, mainCss] = await Promise.all([
+const [indexHtml, linkPartial, faviconPartial, mainCss] = await Promise.all([
   fetchAsText(import.meta.resolve("./templates/index.html")),
-  fetchAsText(import.meta.resolve("./templates/partials/link.html")),
+  fetchAsText(
+    import.meta.resolve("./templates/partials/link.html"),
+    { trim: true },
+  ),
+  fetchAsText(
+    import.meta.resolve("./templates/partials/favicon.html"),
+    { trim: true },
+  ),
   fetchAsText(import.meta.resolve("./templates/main.css")),
 ]);
 
@@ -79,9 +86,14 @@ await Promise.all([
   Deno.writeTextFile(
     `${distDir}/index.html`,
     render(indexHtml, {
+      faviconHtml: config.favicon
+        ? render(faviconPartial, { favicon: config.favicon })
+        : "",
       name: config.name,
-      links: config.links.map((link) => render(linkPartial, link)).join(""),
       profilePicture: config.profilePicture,
+      linksHtml: config.links.map((link) => render(linkPartial, link)).join(
+        "",
+      ),
     }),
   ),
   Deno.writeTextFile(
