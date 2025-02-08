@@ -83,6 +83,7 @@ await Promise.all([
     render(indexHtml, {
       name: config.name,
       links: config.links.map((link) => render(linkPartial, link)).join(""),
+      profilePicture: config.profilePicture,
     }),
   ),
   Deno.writeTextFile(
