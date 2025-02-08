@@ -4,7 +4,6 @@
 .DS_Store
 .vscode
 dist
-!example/dist
 .cache
 node_modules
 npm-debug.log*

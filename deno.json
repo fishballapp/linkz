@@ -7,7 +7,7 @@
     "noUncheckedIndexedAccess": true
   },
   "tasks": {
-    "build:example": "deno run --allow-read=. --allow-write=example src/mod.ts example/linkz.json -f"
+    "build:website": "deno run --allow-read=. --allow-write=dist src/mod.ts linkz.config.json -f"
   },
   "imports": {
     "@std/fs": "jsr:@std/fs@^1.0.11",

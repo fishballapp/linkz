@@ -34,13 +34,13 @@ jobs:
         with:
           deno-version: v2.x # Run with latest stable Deno.
       - name: Build
-        run: deno run -r -A jsr:@fishballpkg/linkz example/linkz.json -f
+        run: deno run -r -A jsr:@fishballpkg/linkz linkz.config.json -f
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'example/dist'
+          path: 'dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

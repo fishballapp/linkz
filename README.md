@@ -2,26 +2,22 @@
 
 A command-line tool to generate your own "linktree-like" website.
 
-## Configuration
+![Logo](./logo.png)
 
-Here is an example configuration
+## How to use?
+
+Create a config:
 
 ```json
-{
-  "profilePicture": "https://pbs.twimg.com/profile_images/1380814586811711492/INwiwIpB_400x400.jpg",
-  "name": "YCM Jason",
-  "links": [
-    {
-      "title": "Github",
-      "url": "https://github.com/ycmjason"
-    },
-    {
-      "title": "Youtube",
-      "url": "https://www.youtube.com/channel/UC5dnaJZdEShWfZOwSCXNGcA"
-    }
-  ]
-}
 ```
+
+```bash
+deno run jsr:@fishballpkg/linkz path/to/your/linkz.config.json
+```
+
+## Configuration
+
+See [here](./linkz.config.json) for an example of the configuration.
 
 ## Author
 
