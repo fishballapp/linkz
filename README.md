@@ -12,7 +12,11 @@ A command-line tool to generate your own "linktree-like" website.
      "$schema": "https://linkz.fishball.app/config-schema.json",
      "outDir": "dist",
      "publicDir": "public",
+
+     // favicon / profilePicture are relative from `publicDir` or a url
+     "favicon": "logo.png",
      "profilePicture": "logo.png",
+
      "name": "Linkz",
      "links": [
        {
@@ -30,7 +34,20 @@ A command-line tool to generate your own "linktree-like" website.
    ```bash
    deno run jsr:@fishballpkg/linkz path/to/your/linkz.config.json
    ```
+   Or if you wish to specify the minimal permission:
+   ```bash
+   deno run \
+     --allow-net=jsr.io \
+     --allow-write=dist \
+     --allow-read=path/to/your/linkz.config.json,dist,public \
+     jsr:@fishballpkg/linkz \
+     path/to/your/linkz.config.json
+   ```
 3. Deploy `dist` or whatever directory you specify in your `config.outDir`!
+
+Check out our
+[continuous deployment](https://github.com/fishballapp/linkz/blob/main/.github/workflows/deploy-website.yml)
+for inspiration too!
 
 ## Author
 

@@ -1,5 +1,5 @@
 import { copy, existsSync } from "@std/fs";
-import { dirname } from "@std/path";
+import { dirname, join } from "@std/path";
 import { help } from "./help.ts";
 import { render } from "./render.ts";
 import { type Config, parseConfig } from "./types/Config.ts";
@@ -60,9 +60,10 @@ if (!configFilePath) {
   help();
   Deno.exit(1);
 }
+const cwd = dirname(configFilePath);
 const config = await getConfig(configFilePath);
 
-const distDir = `${dirname(configFilePath)}/dist`;
+const distDir = join(cwd, config.outDir);
 await ensureDistOk(distDir, { isForce });
 
 const [
@@ -88,12 +89,12 @@ const [
 ]);
 
 if (config.publicDir) {
-  await copy(config.publicDir, distDir, { overwrite: true });
+  await copy(join(cwd, config.publicDir), distDir, { overwrite: true });
 }
 
 await Promise.all([
   Deno.writeTextFile(
-    `${distDir}/index.html`,
+    join(distDir, "index.html"),
     render(indexHtml, {
       faviconHtml: config.favicon
         ? render(faviconPartial, { favicon: config.favicon })
@@ -109,7 +110,7 @@ await Promise.all([
     }),
   ),
   Deno.writeTextFile(
-    `${distDir}/main.css`,
+    join(distDir, "main.css"),
     mainCss,
   ),
 ]);

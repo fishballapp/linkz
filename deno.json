@@ -1,12 +1,13 @@
 {
   "name": "@fishballpkg/linkz",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "license": "MIT",
   "exports": "./src/mod.ts",
   "compilerOptions": {
     "noUncheckedIndexedAccess": true
   },
   "tasks": {
+    "build:website:from-jsr": "deno run -r --allow-net=jsr.io --allow-write=dist --allow-read=./linkz.config.json,dist,public jsr:@fishballpkg/linkz linkz.config.json -f",
     "build:website": "deno run --allow-read=. --allow-write=dist src/mod.ts linkz.config.json -f"
   },
   "imports": {
