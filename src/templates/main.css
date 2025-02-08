@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
-
 :root {
   color-scheme: dark;
 }
@@ -11,13 +10,8 @@ html {
 }
 
 body {
-  margin: 0;
-}
-
-.background {
   background: linear-gradient(0deg, rgb(255, 184, 198), rgb(104, 79, 246));
-  min-width: 100vw;
-  min-height: 100vh;
+  margin: 0;
 }
 
 .container {
