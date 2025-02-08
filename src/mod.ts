@@ -71,6 +71,10 @@ const [indexHtml, linkPartial, mainCss] = await Promise.all([
   fetchAsText(import.meta.resolve("./templates/main.css")),
 ]);
 
+if (config.publicDir) {
+  await copy(config.publicDir, distDir, { overwrite: true });
+}
+
 await Promise.all([
   Deno.writeTextFile(
     `${distDir}/index.html`,
@@ -84,7 +88,6 @@ await Promise.all([
     `${distDir}/main.css`,
     mainCss,
   ),
-  config.publicDir && copy(config.publicDir, distDir, { overwrite: true }),
 ]);
 
 console.log(
