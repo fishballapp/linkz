@@ -34,14 +34,14 @@ A command-line tool to generate your own "linktree-like" website.
    ```bash
    deno run jsr:@fishballpkg/linkz path/to/your/linkz.config.json
    ```
-   Or if you wish to specify the minimal permission:
+   Or if you wish to specify the minimal permission predefined:
    ```bash
    deno run \
      --allow-net=jsr.io \
      --allow-write=dist \
-     --allow-read=path/to/your/linkz.config.json,dist,public \
+     --allow-read=. \
      jsr:@fishballpkg/linkz \
-     path/to/your/linkz.config.json
+     ./path/to/your/linkz.config.json
    ```
 3. Deploy `dist` or whatever directory you specify in your `config.outDir`!
 
