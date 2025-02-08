@@ -1,6 +1,7 @@
 // Please also update config-schema.json
 export type Config = {
   outDir: string;
+  publicDir?: string;
   profilePicture: string;
   name: string;
   links: {
@@ -28,6 +29,10 @@ export const parseConfig = (
 
   if (typeof config.outDir !== "string") {
     reasons.push("%coutDir%c must be a string.");
+  }
+
+  if ("publicDir" in config && typeof config.publicDir !== "string") {
+    reasons.push("%cpublicDir%c must be a string when defined.");
   }
 
   if (typeof config.profilePicture !== "string") {

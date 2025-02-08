@@ -2,16 +2,17 @@
 
 A command-line tool to generate your own "linktree-like" website.
 
-<img src="./logo.png" alt="logo" width="250">
+<img src="./public/logo.png" alt="logo" width="250">
 
 ## Easy as 1, 2, 3...
 
 1. Create a config (see [example](./linkz.config.json))
    ```json
    {
-     "$schema": "https://raw.githubusercontent.com/fishballapp/linkz/refs/heads/main/config-schema.json",
+     "$schema": "https://linkz.fishball.app/config-schema.json",
      "outDir": "dist",
-     "profilePicture": "https://i.imgur.com/Vrb1x1m.png",
+     "publicDir": "public",
+     "profilePicture": "logo.png",
      "name": "Linkz",
      "links": [
        {

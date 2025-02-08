@@ -1,14 +1,9 @@
-import { existsSync } from "@std/fs";
+import { copy, existsSync } from "@std/fs";
 import { dirname } from "@std/path";
 import { help } from "./help.ts";
 import { render } from "./render.ts";
 import { type Config, parseConfig } from "./types/Config.ts";
-console.log(import.meta.url);
-
-const fetchAsText = async (url: string): Promise<string> => {
-  const res = await fetch(url);
-  return await res.text();
-};
+import { fetchAsText } from "./utils/fetchAsText.ts";
 
 if (!import.meta.main) {
   throw new Error("This script is meant as a CLI. Bye.");
@@ -56,6 +51,7 @@ const ensureDistOk = async (
   }
 
   await Deno.remove(distDir, { recursive: true });
+  await Deno.mkdir(distDir);
 };
 
 const isForce = Deno.args.includes("-f") || Deno.args.includes("--force");
@@ -75,8 +71,6 @@ const [indexHtml, linkPartial, mainCss] = await Promise.all([
   fetchAsText(import.meta.resolve("./templates/main.css")),
 ]);
 
-await Deno.mkdir(distDir);
-
 await Promise.all([
   Deno.writeTextFile(
     `${distDir}/index.html`,
@@ -90,6 +84,7 @@ await Promise.all([
     `${distDir}/main.css`,
     mainCss,
   ),
+  config.publicDir && copy(config.publicDir, distDir, { overwrite: true }),
 ]);
 
 console.log(

@@ -1,7 +1,8 @@
 {
-  "$schema": "https://raw.githubusercontent.com/fishballapp/linkz/refs/heads/main/config-schema.json",
+  "$schema": "https://linkz.fishball.app/config-schema.json",
   "outDir": "dist",
-  "profilePicture": "https://i.imgur.com/Vrb1x1m.png",
+  "publicDir": "public",
+  "profilePicture": "logo.png",
   "name": "Linkz",
   "links": [
     {

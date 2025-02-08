@@ -10,10 +10,13 @@
       "type": "string",
       "description": "Path to the output directory."
     },
+    "publicDir": {
+      "type": "string",
+      "description": "Path to the output directory."
+    },
     "profilePicture": {
       "type": "string",
-      "format": "uri",
-      "description": "URL of the profile picture."
+      "description": "URL or path to the profile picture. (Note: path would be relative from `publicDir`)"
     },
     "name": {
       "type": "string",
