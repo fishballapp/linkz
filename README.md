@@ -4,9 +4,7 @@ A command-line tool to generate your own "linktree-like" website.
 
 <img src="./logo.png" alt="logo" width="250">
 
-## How to use?
-
-Easy as 1, 2, 3...
+## Easy as 1, 2, 3...
 
 1. Create a config (see [example](./linkz.config.json))
    ```json
