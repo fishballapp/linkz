@@ -1,10 +1,14 @@
 import { existsSync } from "@std/fs";
-import { dirname, fromFileUrl, join } from "@std/path";
+import { dirname } from "@std/path";
 import { help } from "./help.ts";
 import { render } from "./render.ts";
 import { type Config, parseConfig } from "./types/Config.ts";
+console.log(import.meta.url);
 
-const __dirname = dirname(fromFileUrl(import.meta.url));
+const fetchAsText = async (url: string): Promise<string> => {
+  const res = await fetch(url);
+  return await res.text();
+};
 
 if (!import.meta.main) {
   throw new Error("This script is meant as a CLI. Bye.");
@@ -51,9 +55,10 @@ const config = await getConfig(configFilePath);
 const distDir = `${dirname(configFilePath)}/dist`;
 await ensureDistOk(distDir);
 
-const [indexHtml, linkPartial] = await Promise.all([
-  Deno.readTextFile(join(__dirname, "templates/index.html")),
-  Deno.readTextFile(join(__dirname, "templates/partials/link.html")),
+const [indexHtml, linkPartial, mainCss] = await Promise.all([
+  fetchAsText(import.meta.resolve("./templates/index.html")),
+  fetchAsText(import.meta.resolve("./templates/partials/link.html")),
+  fetchAsText(import.meta.resolve("./templates/main.css")),
 ]);
 
 await Deno.mkdir(distDir);
@@ -66,9 +71,9 @@ await Promise.all([
       links: config.links.map((link) => render(linkPartial, link)).join(""),
     }),
   ),
-  Deno.copyFile(
-    join(__dirname, "templates/main.css"),
+  Deno.writeTextFile(
     `${distDir}/main.css`,
+    mainCss,
   ),
 ]);
 
