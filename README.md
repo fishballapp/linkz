@@ -7,7 +7,7 @@ A command-line tool to generate your own "linktree-like" website.
 ## Easy as 1, 2, 3...
 
 1. Create a config (see [example](./linkz.config.json))
-   ```json
+   ```jsonc
    {
      "$schema": "https://linkz.fishball.app/config-schema.json",
      "outDir": "dist",
