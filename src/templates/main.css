@@ -22,17 +22,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
   padding: 2rem;
+}
+
+.profile, .links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
 
 .profile-picture {
   width: 5rem;
   border-radius: 100%;
-  margin-bottom: 1rem;
-}
-
-.name {
-  margin-bottom: 2rem;
 }
 
 .link {
@@ -49,7 +53,6 @@ body {
     background-color 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s;
   color: white;
   text-decoration: none;
-  margin-bottom: 1rem;
 }
 
 .link:hover {

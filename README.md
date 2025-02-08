@@ -1,4 +1,4 @@
-# Linkz
+# @fishballpkg/linkz
 
 A command-line tool to generate your own "linktree-like" website.
 

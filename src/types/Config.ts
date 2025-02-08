@@ -2,6 +2,7 @@
 export type Config = {
   outDir: string;
   publicDir?: string;
+  poweredBy?: boolean;
   favicon?: string;
   profilePicture: string;
   name: string;
@@ -9,6 +10,10 @@ export type Config = {
     title: string;
     url: string;
   }[];
+};
+
+const DEFAULT_CONFIG: Partial<Config> = {
+  poweredBy: true,
 };
 
 export const parseConfig = (
@@ -26,7 +31,10 @@ export const parseConfig = (
     return { success: false, reasons: ["Config must be an object."] };
   }
 
-  const config = c as Partial<Config>;
+  const config: Partial<Config> = {
+    ...DEFAULT_CONFIG,
+    ...c,
+  };
 
   if (typeof config.outDir !== "string") {
     reasons.push("%coutDir%c must be a string.");
@@ -34,6 +42,10 @@ export const parseConfig = (
 
   if ("publicDir" in config && typeof config.publicDir !== "string") {
     reasons.push("%cpublicDir%c must be a string when defined.");
+  }
+
+  if ("poweredBy" in config && typeof config.poweredBy !== "boolean") {
+    reasons.push("%cpoweredBy%c must be a string when defined.");
   }
 
   if (typeof config.profilePicture !== "string") {
