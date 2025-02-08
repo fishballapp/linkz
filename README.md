@@ -1,24 +1,6 @@
-# LinkShelf
+# Linkz
 
 A command-line tool to generate your own "linktree-like" website.
-
-## Install
-
-```
-npm i -g linkshelf
-```
-
-## Usage
-
-```
-> linkshelf [config] [outDir]
-```
-
-Example:
-
-```
-> linkshelf myconfig.json dist
-```
 
 ## Configuration
 
