@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "A field for the [JSON schema](https://json-schema.org/) specification",
+      "type": "string"
+    },
+    "outDir": {
+      "type": "string",
+      "description": "Path to the output directory."
+    },
+    "profilePicture": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the profile picture."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the user."
+    },
+    "links": {
+      "type": "array",
+      "description": "A list of links associated with the user.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the link."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL of the link."
+          }
+        },
+        "required": ["title", "url"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["outDir", "profilePicture", "name", "links"],
+  "additionalProperties": false
+}

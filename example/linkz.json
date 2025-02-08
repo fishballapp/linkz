@@ -1,0 +1,16 @@
+{
+  "$schema": "../config-schema.json",
+  "outDir": "dist",
+  "profilePicture": "https://pbs.twimg.com/profile_images/1380814586811711492/INwiwIpB_400x400.jpg",
+  "name": "Linkz",
+  "links": [
+    {
+      "title": "Github",
+      "url": "https://github.com/fishballapp/linkz"
+    },
+    {
+      "title": "JSR",
+      "url": "https://jsr.io/@fishballpkg/linkz"
+    }
+  ]
+}
