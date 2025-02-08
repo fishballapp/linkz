@@ -29,7 +29,10 @@ const getConfig = async (configFilePath: string): Promise<Config> => {
   return parseResult.config;
 };
 
-const ensureDistOk = async (distDir: string): Promise<void> => {
+const ensureDistOk = async (
+  distDir: string,
+  { isForce }: { isForce: boolean },
+): Promise<void> => {
   if (!existsSync(distDir)) return;
   console.error(
     `%cWarning: %c${distDir}%c already exists!`,
@@ -37,15 +40,26 @@ const ensureDistOk = async (distDir: string): Promise<void> => {
     "color: cyan",
     "",
   );
-  if (!confirm("Would you like to remove it?")) {
-    console.error("ABORT");
-    Deno.exit(1);
+  if (isForce) {
+    console.log(
+      `%c--force%c detected! Overriding %c${distDir}%c!`,
+      "color: white",
+      "",
+      "color: cyan",
+      "",
+    );
+  } else {
+    if (!confirm("Would you like to remove it?")) {
+      console.error("ABORT");
+      Deno.exit(1);
+    }
   }
 
   await Deno.remove(distDir, { recursive: true });
 };
 
-const [configFilePath] = Deno.args;
+const isForce = Deno.args.includes("-f") || Deno.args.includes("--force");
+const [configFilePath] = Deno.args.filter((x) => !x.startsWith("-"));
 if (!configFilePath) {
   help();
   Deno.exit(1);
@@ -53,7 +67,7 @@ if (!configFilePath) {
 const config = await getConfig(configFilePath);
 
 const distDir = `${dirname(configFilePath)}/dist`;
-await ensureDistOk(distDir);
+await ensureDistOk(distDir, { isForce });
 
 const [indexHtml, linkPartial, mainCss] = await Promise.all([
   fetchAsText(import.meta.resolve("./templates/index.html")),
