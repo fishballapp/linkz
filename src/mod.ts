@@ -1,4 +1,4 @@
-import { copy, ensureFile, existsSync } from "@std/fs";
+import { copy, ensureDir, ensureFile, existsSync } from "@std/fs";
 import { basename, dirname, join } from "@std/path";
 import { help } from "./help.ts";
 import { render } from "./render.ts";
@@ -136,7 +136,13 @@ const renderHtmlWithTemplate = (
 
 if (config.publicDir) {
   for await (const entry of Deno.readDir(config.publicDir)) {
+    if (entry.isSymlink) {
+      console.log("symlink in public dir is not supported yet, skipping");
+      continue;
+    }
+
     const path = join(config.publicDir, entry.name);
+
     if (entry.isFile && entry.name.endsWith(".md")) {
       const outPath = join(distDir, `${basename(path, ".md")}.html`);
       const md = await Deno.readTextFile(path);
@@ -154,9 +160,12 @@ if (config.publicDir) {
       );
       continue;
     }
+
+    const outPath = join(distDir, entry.name);
+    await (entry.isFile ? ensureFile : ensureDir)(outPath);
     await copy(
       path,
-      join(distDir, entry.name),
+      outPath,
       { overwrite: true },
     );
   }
