@@ -1,5 +1,5 @@
 {
-  "$schema": "https://linkz.fishball.app/config-schema.json",
+  "$schema": "./public/config-schema.json",
   "outDir": "dist",
   "publicDir": "public",
   "favicon": "logo.png",
@@ -7,12 +7,18 @@
   "name": "Linkz",
   "links": [
     {
+      "title": "Simple Markdown Guide",
+      "href": "/exploring-markdown.html"
+    },
+    {
       "title": "Github",
-      "url": "https://github.com/fishballapp/linkz"
+      "href": "https://github.com/fishballapp/linkz",
+      "external": true
     },
     {
       "title": "JSR",
-      "url": "https://jsr.io/@fishballpkg/linkz"
+      "href": "https://jsr.io/@fishballpkg/linkz",
+      "external": true
     }
   ]
 }

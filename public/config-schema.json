@@ -40,13 +40,16 @@
             "type": "string",
             "description": "Title of the link."
           },
-          "url": {
+          "href": {
             "type": "string",
-            "format": "uri",
-            "description": "URL of the link."
+            "description": "URL of the link or path"
+          },
+          "external": {
+            "type": "boolean",
+            "description": "If `true`, the link will open in new window. (default: false)"
           }
         },
-        "required": ["title", "url"],
+        "required": ["title", "href"],
         "additionalProperties": false
       }
     }

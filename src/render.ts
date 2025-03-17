@@ -8,8 +8,11 @@ export const render = (
       const value = variables[key];
       if (typeof value === "undefined") {
         console.warn(
-          `%cCannot find "${key}". Will use empty string instead`,
+          `%cRender Warning:%c Cannot find %c${key}%c. Will use empty string instead`,
           "color: yellow;",
+          "",
+          "color: cyan;",
+          "",
         );
       }
       return value ?? "";

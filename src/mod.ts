@@ -1,9 +1,10 @@
 import { copy, existsSync } from "@std/fs";
-import { dirname, join } from "@std/path";
+import { basename, dirname, join } from "@std/path";
 import { help } from "./help.ts";
 import { render } from "./render.ts";
 import { type Config, parseConfig } from "./types/Config.ts";
 import { fetchAsText } from "./utils/fetchAsText.ts";
+import { renderMarkdown } from "./utils/renderMarkdown.ts";
 
 if (!import.meta.main) {
   throw new Error("This script is meant as a CLI. Bye.");
@@ -14,7 +15,7 @@ const getConfig = async (configFilePath: string): Promise<Config> => {
     JSON.parse(await Deno.readTextFile(configFilePath)),
   );
 
-  if (parseResult.success === false) {
+  if (!parseResult.success) {
     console.error("%cError while parsing config:", "color: yellow");
     for (const reason of parseResult.reasons) {
       console.error(`  - ${reason}%c`, "color: white", "", "", "", "");
@@ -67,15 +68,26 @@ const distDir = join(cwd, config.outDir);
 await ensureDistOk(distDir, { isForce });
 
 const [
-  indexHtml,
-  linkPartial,
+  templateHtml,
+  homePartial,
+  markdownPartial,
+  linkInternalPartial,
+  linkExternalPartial,
   faviconPartial,
   mainCss,
+  normalizeCss,
+  highlightjsCss,
   poweredByHtml,
 ] = await Promise.all([
-  fetchAsText(import.meta.resolve("./templates/index.html")),
+  fetchAsText(import.meta.resolve("./templates/template.html")),
+  fetchAsText(import.meta.resolve("./templates/partials/home.html")),
+  fetchAsText(import.meta.resolve("./templates/partials/markdown.html")),
   fetchAsText(
-    import.meta.resolve("./templates/partials/link.html"),
+    import.meta.resolve("./templates/partials/link-internal.html"),
+    { trim: true },
+  ),
+  fetchAsText(
+    import.meta.resolve("./templates/partials/link-external.html"),
     { trim: true },
   ),
   fetchAsText(
@@ -83,35 +95,95 @@ const [
     { trim: true },
   ),
   fetchAsText(import.meta.resolve("./templates/main.css")),
+  fetchAsText(import.meta.resolve("./templates/normalize.css")),
+  fetchAsText(import.meta.resolve("./templates/highlightjs.css")),
   fetchAsText(import.meta.resolve("./templates/partials/powered-by.html"), {
     trim: true,
   }),
 ]);
 
+const cssContents = new Map<string, string>([
+  ["highlightjs.css", highlightjsCss],
+  ["normalize.css", normalizeCss],
+  ["main.css", mainCss],
+]);
+const renderHtmlWithTemplate = (
+  bodyHtml: string,
+  {
+    stylesheets = {
+      gfm: false,
+    },
+  }: { stylesheets?: { gfm: boolean } } = {},
+) =>
+  render(templateHtml, {
+    faviconHtml: config.favicon
+      ? render(faviconPartial, { favicon: config.favicon })
+      : "",
+    title: config.name,
+    stylesheetsHtml: cssContents
+      .keys()
+      .filter((filename) => {
+        if (!stylesheets.gfm) {
+          return filename !== "gfm.css";
+        }
+        return true;
+      }).map((fileName) => `<link rel="stylesheet" href="./${fileName}">`)
+      .toArray()
+      .join("\n"),
+    bodyHtml,
+    ...(config.poweredBy && {
+      poweredByHtml: poweredByHtml,
+    }),
+  });
+
 if (config.publicDir) {
-  await copy(join(cwd, config.publicDir), distDir, { overwrite: true });
+  for await (const entry of Deno.readDir(config.publicDir)) {
+    const path = join(config.publicDir, entry.name);
+    if (entry.isFile && entry.name.endsWith(".md")) {
+      await Deno.writeTextFile(
+        join(distDir, `${basename(path, ".md")}.html`),
+        renderHtmlWithTemplate(
+          render(markdownPartial, {
+            markdownHtml: renderMarkdown(await Deno.readTextFile(path)),
+          }),
+          {
+            stylesheets: { gfm: true },
+          },
+        ),
+      );
+      continue;
+    }
+    await copy(
+      path,
+      join(distDir, entry.name),
+      { overwrite: true },
+    );
+  }
 }
 
 await Promise.all([
   Deno.writeTextFile(
     join(distDir, "index.html"),
-    render(indexHtml, {
-      faviconHtml: config.favicon
-        ? render(faviconPartial, { favicon: config.favicon })
-        : "",
-      name: config.name,
-      profilePicture: config.profilePicture,
-      linksHtml: config.links.map((link) => render(linkPartial, link)).join(
-        "",
-      ),
-      ...(config.poweredBy && {
-        poweredByHtml: poweredByHtml,
+    renderHtmlWithTemplate(
+      render(homePartial, {
+        name: config.name,
+        profilePicture: config.profilePicture,
+        linksHtml: config.links
+          .map((link) =>
+            render(link.external ? linkExternalPartial : linkInternalPartial, {
+              title: link.title,
+              href: link.href,
+            })
+          )
+          .join(""),
       }),
-    }),
+    ),
   ),
-  Deno.writeTextFile(
-    join(distDir, "main.css"),
-    mainCss,
+  ...cssContents.entries().map(([fileName, content]) =>
+    Deno.writeTextFile(
+      join(distDir, fileName),
+      content,
+    )
   ),
 ]);
 
