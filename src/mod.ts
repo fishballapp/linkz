@@ -1,4 +1,4 @@
-import { copy, existsSync } from "@std/fs";
+import { copy, ensureFile, existsSync } from "@std/fs";
 import { basename, dirname, join } from "@std/path";
 import { help } from "./help.ts";
 import { render } from "./render.ts";
@@ -140,8 +140,10 @@ if (config.publicDir) {
   for await (const entry of Deno.readDir(config.publicDir)) {
     const path = join(config.publicDir, entry.name);
     if (entry.isFile && entry.name.endsWith(".md")) {
+      const outPath = join(distDir, `${basename(path, ".md")}.html`);
+      await ensureFile(outPath);
       await Deno.writeTextFile(
-        join(distDir, `${basename(path, ".md")}.html`),
+        outPath,
         renderHtmlWithTemplate(
           render(markdownPartial, {
             markdownHtml: renderMarkdown(await Deno.readTextFile(path)),
