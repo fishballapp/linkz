@@ -52,6 +52,25 @@ const markdownIt = MarkdownIt({
     }
     return renderTokenOriginal(tokens, idx, options);
   };
+}).use((md) => {
+  const renderLinkOpenOriginal = md.renderer.rules.link_open ||
+    function (tokens, idx, options, _env, self) {
+      return self.renderToken(tokens, idx, options);
+    };
+
+  md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+    const href = tokens[idx]?.attrGet("href");
+    if (/^https?:\/\//i.test(href ?? "")) {
+      tokens[idx]?.attrSet("target", "_blank");
+      tokens[idx]?.attrSet("rel", "noopener noreferrer");
+    }
+    return renderLinkOpenOriginal(tokens, idx, options, env, self);
+  };
+}).use((md) => {
+  md.linkify.tlds([
+    "app",
+    "xyz",
+  ], true);
 });
 
 export const renderMarkdown = (md: string): string => markdownIt.render(md);

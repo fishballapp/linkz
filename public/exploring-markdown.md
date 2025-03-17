@@ -6,6 +6,23 @@ powerful features that make writing documentation, README files, and project
 notes more effective. This article explores some of its key features with
 examples. 🎉
 
+## Links
+
+Internal Links (absolute or relative paths) will not open in a new tab.
+
+- [Home](/)
+
+External Links (starting with `https://` or `http://`) would open in a new tab.
+
+- [linkz](https://linkz.fishball.app/)
+- [ycmjason](https://www.ycmjason.com/)
+
+URL like links are automatically linked
+
+- https://www.fishball.app/
+- fishball.app
+- yo@fishball.app
+
 ## 🎨 Syntax Highlighting
 
 GFM allows syntax highlighting for code blocks using triple backticks
