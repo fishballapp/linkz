@@ -10,18 +10,22 @@ html {
 }
 
 body {
-  background: linear-gradient(0deg, rgb(255, 184, 198), rgb(104, 79, 246));
+  background: linear-gradient(0deg, rgb(189 119 133), rgb(114 89 255));
   margin: 0;
 }
 
 .container {
   max-width: 32rem;
   margin: 0 auto;
+  padding: 1rem;
+}
+
+.links-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  padding: 2rem;
+  padding: 2rem 1rem;
 }
 
 .profile, .links {
@@ -56,4 +60,49 @@ body {
 .link:hover {
   background: white;
   color: rgb(105, 79, 246);
+}
+
+a {
+  color: #ffd700; /* Gold for good contrast against purple */
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #ffa500; /* Orange for a distinct hover effect */
+}
+
+.markdown-body {
+  code {
+    background-color: hsla(0, 0%, 10%, 0.697);
+  }
+  pre code {
+    display: block;
+    padding: 0.5rem;
+  }
+
+  table {
+    font-size: inherit;
+    border-collapse: collapse;
+
+    td, th {
+      padding: 0.5rem;
+      border: 1px solid #4f4556;
+    }
+  }
+
+  blockquote {
+    margin: 0;
+    padding-left: 1rem;
+    border-left: 0.25rem solid currentColor;
+    color: hsl(0deg 0% 100% / 76%);
+  }
+
+  .task-list-item {
+    list-style-type: none;
+
+    input[type="checkbox"] {
+      margin-left: -1.4em;
+    }
+  }
 }

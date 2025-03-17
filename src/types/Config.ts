@@ -1,16 +1,23 @@
-// Please also update config-schema.json
-export type Config = {
-  outDir: string;
-  publicDir?: string;
-  poweredBy?: boolean;
-  favicon?: string;
-  profilePicture: string;
-  name: string;
-  links: {
-    title: string;
-    url: string;
-  }[];
-};
+import { z } from "zod";
+
+// When updating config schema, please also update config-schema.json
+const ConfigSchema = z.object({
+  outDir: z.string(),
+  publicDir: z.string().optional(),
+  poweredBy: z.boolean().optional(),
+  favicon: z.string().optional(),
+  profilePicture: z.string(),
+  name: z.string(),
+  links: z.array(
+    z.object({
+      title: z.string(),
+      href: z.string(),
+      external: z.boolean().default(false),
+    }),
+  ),
+});
+
+export type Config = z.infer<typeof ConfigSchema>;
 
 const DEFAULT_CONFIG: Partial<Config> = {
   poweredBy: true,
@@ -25,55 +32,20 @@ export const parseConfig = (
   success: false;
   reasons: string[];
 } => {
-  const reasons: string[] = [];
+  const parsed = ConfigSchema.safeParse(c);
 
-  if (typeof c !== "object" || c === null) {
-    return { success: false, reasons: ["Config must be an object."] };
+  if (!parsed.success) {
+    return {
+      success: false,
+      reasons: parsed.error.errors.map((e) => e.message),
+    };
   }
 
-  const config: Partial<Config> = {
-    ...DEFAULT_CONFIG,
-    ...c,
+  return {
+    success: true,
+    config: {
+      ...DEFAULT_CONFIG,
+      ...parsed.data,
+    },
   };
-
-  if (typeof config.outDir !== "string") {
-    reasons.push("%coutDir%c must be a string.");
-  }
-
-  if ("publicDir" in config && typeof config.publicDir !== "string") {
-    reasons.push("%cpublicDir%c must be a string when defined.");
-  }
-
-  if ("poweredBy" in config && typeof config.poweredBy !== "boolean") {
-    reasons.push("%cpoweredBy%c must be a string when defined.");
-  }
-
-  if (typeof config.profilePicture !== "string") {
-    reasons.push("%cprofilePicture%c must be a string.");
-  }
-
-  if (typeof config.name !== "string") {
-    reasons.push("%cname%c must be a string.");
-  }
-
-  if (!Array.isArray(config.links)) {
-    reasons.push("%clinks%c must be an array.");
-  } else {
-    config.links.forEach((link, index) => {
-      if (typeof link !== "object" || link === null) {
-        reasons.push(`%clinks[${index}]%c must be an object.`);
-      } else {
-        if (typeof link.title !== "string") {
-          reasons.push(`%clinks[${index}].title%c must be a string.`);
-        }
-        if (typeof link.url !== "string") {
-          reasons.push(`%clinks[${index}].url%c must be a string.`);
-        }
-      }
-    });
-  }
-
-  return reasons.length > 0
-    ? { success: false, reasons }
-    : { success: true, config: config as Config };
 };
