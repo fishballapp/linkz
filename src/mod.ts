@@ -4,6 +4,7 @@ import { help } from "./help.ts";
 import { render } from "./render.ts";
 import { type Config, parseConfig } from "./types/Config.ts";
 import { fetchAsText } from "./utils/fetchAsText.ts";
+import { parseTitle } from "./utils/markdown.ts";
 import { renderMarkdown } from "./utils/renderMarkdown.ts";
 
 if (!import.meta.main) {
@@ -110,24 +111,21 @@ const cssContents = new Map<string, string>([
 const renderHtmlWithTemplate = (
   bodyHtml: string,
   {
-    stylesheets = {
-      gfm: false,
-    },
-  }: { stylesheets?: { gfm: boolean } } = {},
+    title,
+  }: {
+    title?: string;
+  } = {},
 ) =>
   render(templateHtml, {
     faviconHtml: config.favicon
       ? render(faviconPartial, { favicon: config.favicon })
       : "",
-    title: config.name,
+    title: typeof title === "string"
+      ? `${title} | ${config.name}`
+      : config.name,
     stylesheetsHtml: cssContents
       .keys()
-      .filter((filename) => {
-        if (!stylesheets.gfm) {
-          return filename !== "gfm.css";
-        }
-        return true;
-      }).map((fileName) => `<link rel="stylesheet" href="./${fileName}">`)
+      .map((fileName) => `<link rel="stylesheet" href="./${fileName}">`)
       .toArray()
       .join("\n"),
     bodyHtml,
@@ -141,15 +139,16 @@ if (config.publicDir) {
     const path = join(config.publicDir, entry.name);
     if (entry.isFile && entry.name.endsWith(".md")) {
       const outPath = join(distDir, `${basename(path, ".md")}.html`);
+      const md = await Deno.readTextFile(path);
       await ensureFile(outPath);
       await Deno.writeTextFile(
         outPath,
         renderHtmlWithTemplate(
           render(markdownPartial, {
-            markdownHtml: renderMarkdown(await Deno.readTextFile(path)),
+            markdownHtml: renderMarkdown(md),
           }),
           {
-            stylesheets: { gfm: true },
+            title: parseTitle(md),
           },
         ),
       );
