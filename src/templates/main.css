@@ -24,6 +24,12 @@ body {
 }
 
 .container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.container-xs {
   max-width: 32rem;
   margin: 0 auto;
   padding: 1rem;

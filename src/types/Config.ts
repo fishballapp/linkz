@@ -8,11 +8,11 @@ const ConfigSchema = z.object({
   favicon: z.string().optional(),
   profilePicture: z.string(),
   name: z.string(),
+  stylesheets: z.string().array().default([]),
   links: z.array(
     z.object({
       title: z.string(),
       href: z.string(),
-      external: z.boolean().default(false),
     }),
   ),
 });

@@ -1,10 +1,8 @@
-# 🚀 Exploring GitHub-Flavored Markdown (GFM)
+# 🚀 Exploring Markdown
 
-GitHub-Flavored Markdown (GFM) extends the standard
-[Markdown](https://daringfireball.net/projects/markdown/) syntax with some
-powerful features that make writing documentation, README files, and project
-notes more effective. This article explores some of its key features with
-examples. 🎉
+- [[See me on Github]](https://github.com/fishballapp/linkz/blob/main/public/exploring-markdown.md)
+
+Here are some example markdown that is supported by Linkz.
 
 ## Links
 

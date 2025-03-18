@@ -1,5 +1,6 @@
 import MarkdownIt from "markdown-it";
 import highlightjs from "markdown-it-highlightjs";
+import { isHrefFullUrl } from "./isHrefFullUrl.ts";
 
 const markdownIt = MarkdownIt({
   html: true,
@@ -60,7 +61,7 @@ const markdownIt = MarkdownIt({
 
   md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
     const href = tokens[idx]?.attrGet("href");
-    if (/^(https?|mailto):/i.test(href ?? "")) {
+    if (isHrefFullUrl(href ?? "")) {
       tokens[idx]?.attrSet("target", "_blank");
       tokens[idx]?.attrSet("rel", "noopener noreferrer");
     }

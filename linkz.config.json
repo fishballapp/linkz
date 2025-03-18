@@ -5,20 +5,25 @@
   "favicon": "logo.png",
   "profilePicture": "logo.png",
   "name": "Linkz",
+  "stylesheets": [
+    "usage.css"
+  ],
   "links": [
+    {
+      "title": "Usage",
+      "href": "/usage"
+    },
     {
       "title": "Simple Markdown Guide",
       "href": "/exploring-markdown"
     },
     {
       "title": "Github",
-      "href": "https://github.com/fishballapp/linkz",
-      "external": true
+      "href": "https://github.com/fishballapp/linkz"
     },
     {
       "title": "JSR",
-      "href": "https://jsr.io/@fishballpkg/linkz",
-      "external": true
+      "href": "https://jsr.io/@fishballpkg/linkz"
     }
   ]
 }

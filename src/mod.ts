@@ -4,6 +4,7 @@ import { help } from "./help.ts";
 import { render } from "./render.ts";
 import { type Config, parseConfig } from "./types/Config.ts";
 import { fetchAsText } from "./utils/fetchAsText.ts";
+import { isHrefFullUrl } from "./utils/isHrefFullUrl.ts";
 import { parseTitle } from "./utils/markdown.ts";
 import { renderMarkdown } from "./utils/renderMarkdown.ts";
 
@@ -123,10 +124,8 @@ const renderHtmlWithTemplate = (
     title: typeof title === "string"
       ? `${title} | ${config.name}`
       : config.name,
-    stylesheetsHtml: cssContents
-      .keys()
+    stylesheetsHtml: [...cssContents.keys(), ...config.stylesheets]
       .map((fileName) => `<link rel="stylesheet" href="./${fileName}">`)
-      .toArray()
       .join("\n"),
     bodyHtml,
     ...(config.poweredBy && {
@@ -144,7 +143,8 @@ if (config.publicDir) {
     const path = join(config.publicDir, entry.name);
 
     if (entry.isFile && entry.name.endsWith(".md")) {
-      const outPath = join(distDir, `${basename(path, ".md")}.html`);
+      const nameWithoutExt = basename(path, ".md");
+      const outPath = join(distDir, `${nameWithoutExt}.html`);
       const md = await Deno.readTextFile(path);
       await ensureFile(outPath);
       await Deno.writeTextFile(
@@ -152,6 +152,7 @@ if (config.publicDir) {
         renderHtmlWithTemplate(
           render(markdownPartial, {
             markdownHtml: renderMarkdown(md),
+            className: `${nameWithoutExt}-md`,
           }),
           {
             title: parseTitle(md),
@@ -180,10 +181,15 @@ await Promise.all([
         profilePicture: config.profilePicture,
         linksHtml: config.links
           .map((link) =>
-            render(link.external ? linkExternalPartial : linkInternalPartial, {
-              title: link.title,
-              href: link.href,
-            })
+            render(
+              isHrefFullUrl(link.href)
+                ? linkExternalPartial
+                : linkInternalPartial,
+              {
+                title: link.title,
+                href: link.href,
+              },
+            )
           )
           .join(""),
       }),

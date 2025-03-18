@@ -1,0 +1,5 @@
+.usage-md {
+  p, li {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+}

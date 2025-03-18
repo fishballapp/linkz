@@ -30,6 +30,14 @@
       "type": "string",
       "description": "Name of the user."
     },
+    "stylesheets": {
+      "type": "array",
+      "description": "A list of stylesheets",
+      "items": {
+        "type": "string",
+        "description": "Path or URL to Stylesheet (Note: path would be relative to `publicDir`, or a full URL)"
+      }
+    },
     "links": {
       "type": "array",
       "description": "A list of links associated with the user.",
@@ -42,11 +50,7 @@
           },
           "href": {
             "type": "string",
-            "description": "URL of the link or path"
-          },
-          "external": {
-            "type": "boolean",
-            "description": "If `true`, the link will open in new window. (default: false)"
+            "description": "URL or path. Full url including `https://` will open in a new tab and paths `/path` would open in current tab."
           }
         },
         "required": ["title", "href"],
