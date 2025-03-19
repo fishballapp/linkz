@@ -88,6 +88,8 @@ a:hover {
 }
 
 .markdown-body {
+  --border-color: #3d444db3;
+
   code {
     background-color: hsla(0, 0%, 10%, 0.697);
   }
@@ -102,7 +104,7 @@ a:hover {
 
     td, th {
       padding: 0.5rem;
-      border: 1px solid #4f4556;
+      border: 1px solid var(--border-color);
     }
   }
 
@@ -119,5 +121,14 @@ a:hover {
     input[type="checkbox"] {
       margin-left: -1.4em;
     }
+  }
+
+  h1, h2 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  hr {
+    border-top: 1px solid var(--border-color);
   }
 }

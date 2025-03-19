@@ -1,6 +1,6 @@
 {
   "name": "@fishballpkg/linkz",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "license": "MIT",
   "exports": "./src/mod.ts",
   "compilerOptions": {
