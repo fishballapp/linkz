@@ -34,8 +34,6 @@ const greet = (name) => {
 greet("GitHub");
 ```
 
----
-
 ## ✅ Task Lists
 
 Task lists are interactive checklists useful for tracking progress.
@@ -47,8 +45,6 @@ Task lists are interactive checklists useful for tracking progress.
 - [ ] Commit and Push to GitHub
   - [ ] nested task
 
----
-
 ## 📊 Tables
 
 GFM supports tables for structuring data.
@@ -59,8 +55,6 @@ GFM supports tables for structuring data.
 | Task Lists          | ✅         |
 | Tables              | ✅         |
 
----
-
 ## ✍️ Text Formatting
 
 GFM allows various text formatting options:
@@ -69,8 +63,6 @@ GFM allows various text formatting options:
 - _Italic text_ using `*italic*` → _italic_
 - ~~Strikethrough~~ using `~~strikethrough~~`
 - `Inline code` using backticks → `console.log('Hello');`
-
----
 
 ## 🖥 Code Blocks
 
@@ -85,13 +77,9 @@ def greet(name):
 greet("GitHub")
 ```
 
----
-
 ## 🗨 Block Quotes
 
 > "Markdown is awesome!" – Everyone
-
----
 
 ## 🎯 Conclusion
 

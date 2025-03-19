@@ -127,8 +127,10 @@ a:hover {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
   }
+}
 
-  hr {
-    border-top: 1px solid var(--border-color);
-  }
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--border-color);
 }

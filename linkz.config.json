@@ -5,9 +5,7 @@
   "favicon": "logo.png",
   "profilePicture": "logo.png",
   "name": "Linkz",
-  "stylesheets": [
-    "usage.css"
-  ],
+  "stylesheets": ["usage.css"],
   "links": [
     {
       "title": "Usage",

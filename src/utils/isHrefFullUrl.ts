@@ -1,1 +1,1 @@
-export const isHrefFullUrl = (href: string) => /^(https?|mailto):/i.test(href);
+export const isFullUrl = (href: string) => /^(https?|mailto):/i.test(href);

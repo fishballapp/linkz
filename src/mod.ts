@@ -1,10 +1,11 @@
 import { copy, ensureDir, ensureFile, existsSync } from "@std/fs";
-import { basename, dirname, join } from "@std/path";
+import { dirname, join, resolve, toFileUrl } from "@std/path";
+import { basename } from "@std/path/unstable-basename";
 import { help } from "./help.ts";
 import { render } from "./render.ts";
 import { type Config, parseConfig } from "./types/Config.ts";
 import { fetchAsText } from "./utils/fetchAsText.ts";
-import { isHrefFullUrl } from "./utils/isHrefFullUrl.ts";
+import { isFullUrl } from "./utils/isHrefFullUrl.ts";
 import { parseTitle } from "./utils/markdown.ts";
 import { renderMarkdown } from "./utils/renderMarkdown.ts";
 
@@ -80,6 +81,7 @@ const [
   normalizeCss,
   highlightjsCss,
   poweredByHtml,
+  customStylesheets,
 ] = await Promise.all([
   fetchAsText(import.meta.resolve("./templates/template.html")),
   fetchAsText(import.meta.resolve("./templates/partials/home.html")),
@@ -102,13 +104,52 @@ const [
   fetchAsText(import.meta.resolve("./templates/partials/powered-by.html"), {
     trim: true,
   }),
+  Promise.all(
+    config.stylesheets
+      .filter((stylsheetUrlOrPath) => !isFullUrl(stylsheetUrlOrPath))
+      .map(async (path) => {
+        return [
+          basename(path),
+          await fetchAsText(
+            toFileUrl(resolve(
+              config.publicDir ?? (() => {
+                throw new Error(
+                  "`publicDir` is not defined while `stylesheets` is. Please provide `publicDir` so we know where to look up `stylesheets`.",
+                );
+              })(),
+              path,
+            )).href,
+          ),
+        ] as const;
+      }),
+  ),
 ]);
 
-const cssContents = new Map<string, string>([
-  ["highlightjs.css", highlightjsCss],
-  ["normalize.css", normalizeCss],
-  ["main.css", mainCss],
-]);
+async function sha1Short(s: string): Promise<string> {
+  const data = new TextEncoder().encode(s);
+  return Array.from(
+    new Uint8Array(await crypto.subtle.digest("SHA-1", data)),
+  ).map((b) => b.toString(16).padStart(2, "0"))
+    .join("")
+    .slice(0, 8);
+}
+
+const cssContents = new Map<string, string>(
+  await Promise.all(([
+    [
+      "highlightjs.css",
+      highlightjsCss,
+    ],
+    ["normalize.css", normalizeCss],
+    ["main.css", mainCss],
+    ...customStylesheets,
+  ] as const).map(async ([fileName, content]) =>
+    [
+      `${basename(fileName, ".css")}.${await sha1Short(content)}.css`,
+      content,
+    ] as const
+  )),
+);
 const renderHtmlWithTemplate = (
   bodyHtml: string,
   {
@@ -124,8 +165,11 @@ const renderHtmlWithTemplate = (
     title: typeof title === "string"
       ? `${title} | ${config.name}`
       : config.name,
-    stylesheetsHtml: [...cssContents.keys(), ...config.stylesheets]
-      .map((fileName) => `<link rel="stylesheet" href="./${fileName}">`)
+    stylesheetsHtml: [
+      ...cssContents.keys().map((n) => `/${n}`),
+      ...config.stylesheets.filter(isFullUrl),
+    ]
+      .map((href) => `<link rel="stylesheet" href="${href}">`)
       .join("\n"),
     bodyHtml,
     ...(config.poweredBy && {
@@ -134,18 +178,33 @@ const renderHtmlWithTemplate = (
   });
 
 if (config.publicDir) {
+  const publicDir = config.publicDir;
+  const skipCopyAbsolutePaths = new Set(
+    // skip stylesheets that's defined in config.stylesheets
+    config.stylesheets
+      .filter((urlOrPath) => !isFullUrl(urlOrPath))
+      .map((path) => resolve(publicDir, path)),
+  );
+
   for await (const entry of Deno.readDir(config.publicDir)) {
     if (entry.isSymlink) {
       console.log("symlink in public dir is not supported yet, skipping");
       continue;
     }
 
-    const path = join(config.publicDir, entry.name);
+    const absolutePath = resolve(config.publicDir, entry.name);
+
+    if (
+      skipCopyAbsolutePaths.has(absolutePath)
+    ) {
+      // `stylesheets` are processed via `cssContents`, ignoring. If css is not listed, procceed to copying it.
+      continue;
+    }
 
     if (entry.isFile && entry.name.endsWith(".md")) {
-      const nameWithoutExt = basename(path, ".md");
+      const nameWithoutExt = basename(absolutePath, ".md");
       const outPath = join(distDir, `${nameWithoutExt}.html`);
-      const md = await Deno.readTextFile(path);
+      const md = await Deno.readTextFile(absolutePath);
       await ensureFile(outPath);
       await Deno.writeTextFile(
         outPath,
@@ -165,7 +224,7 @@ if (config.publicDir) {
     const outPath = join(distDir, entry.name);
     await (entry.isFile ? ensureFile : ensureDir)(outPath);
     await copy(
-      path,
+      absolutePath,
       outPath,
       { overwrite: true },
     );
@@ -182,9 +241,7 @@ await Promise.all([
         linksHtml: config.links
           .map((link) =>
             render(
-              isHrefFullUrl(link.href)
-                ? linkExternalPartial
-                : linkInternalPartial,
+              isFullUrl(link.href) ? linkExternalPartial : linkInternalPartial,
               {
                 title: link.title,
                 href: link.href,
