@@ -6,6 +6,7 @@ const ConfigSchema = z.object({
   publicDir: z.string().optional(),
   poweredBy: z.boolean().optional(),
   favicon: z.string().optional(),
+  ga: z.string().optional(),
   profilePicture: z.string(),
   name: z.string(),
   stylesheets: z.string().array().default([]),

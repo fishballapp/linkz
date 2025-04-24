@@ -72,6 +72,7 @@ await ensureDistOk(distDir, { isForce });
 
 const [
   templateHtml,
+  gaPartial,
   homePartial,
   markdownPartial,
   linkInternalPartial,
@@ -84,6 +85,7 @@ const [
   customStylesheets,
 ] = await Promise.all([
   fetchAsText(import.meta.resolve("./templates/template.html")),
+  fetchAsText(import.meta.resolve("./templates/partials/ga.html")),
   fetchAsText(import.meta.resolve("./templates/partials/home.html")),
   fetchAsText(import.meta.resolve("./templates/partials/markdown.html")),
   fetchAsText(
@@ -162,6 +164,7 @@ const renderHtmlWithTemplate = (
     faviconHtml: config.favicon
       ? render(faviconPartial, { favicon: config.favicon })
       : "",
+    gaHtml: config.ga ? render(gaPartial, { gaId: config.ga }) : "",
     title: typeof title === "string"
       ? `${title} | ${config.name}`
       : config.name,

@@ -4,6 +4,7 @@
   "publicDir": "public",
   "favicon": "logo.png",
   "profilePicture": "logo.png",
+  "ga": "G-9R35HFWLR8",
   "name": "Linkz",
   "stylesheets": ["usage.css"],
   "links": [

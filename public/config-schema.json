@@ -22,6 +22,10 @@
       "type": "string",
       "description": "URL or path to the favicon. (Note: path would be relative to `publicDir`)"
     },
+    "ga": {
+      "type": "string",
+      "description": "The tracking id for GA. E.g. G-9R35HFWLR8."
+    },
     "profilePicture": {
       "type": "string",
       "description": "URL or path to the profile picture. (Note: path would be relative to `publicDir`)"
