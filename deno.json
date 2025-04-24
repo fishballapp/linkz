@@ -1,6 +1,6 @@
 {
   "name": "@fishballpkg/linkz",
-  "version": "0.8.3",
+  "version": "0.9.0",
   "license": "MIT",
   "exports": "./src/mod.ts",
   "compilerOptions": {
@@ -12,12 +12,12 @@
     "build:website": "deno run --allow-env=NO_COLOR,FORCE_COLOR,TERM --allow-read=. --allow-write=dist src/mod.ts linkz.config.json -f"
   },
   "imports": {
-    "@std/fs": "jsr:@std/fs@^1.0.11",
-    "@std/path": "jsr:@std/path@^1.0.8",
+    "@std/fs": "jsr:@std/fs@^1.0.17",
+    "@std/path": "jsr:@std/path@^1.0.9",
     "@types/markdown-it": "npm:@types/markdown-it@^14.1.2",
     "markdown-it": "npm:markdown-it@^14.1.0",
     "markdown-it-highlightjs": "npm:markdown-it-highlightjs@^4.2.0",
-    "zod": "npm:zod@^3.24.2"
+    "zod": "npm:zod@^3.24.3"
   },
   "publish": {
     "include": ["src", "LICENSE", "README.md", "config-schema.json"],

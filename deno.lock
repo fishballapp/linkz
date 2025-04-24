@@ -1,23 +1,23 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@std/fs@^1.0.11": "1.0.11",
-    "jsr:@std/path@^1.0.8": "1.0.8",
+    "jsr:@std/fs@^1.0.17": "1.0.17",
+    "jsr:@std/path@^1.0.9": "1.0.9",
     "npm:@types/markdown-it@^14.1.2": "14.1.2",
     "npm:highlight.js@^11.11.1": "11.11.1",
     "npm:markdown-it-highlightjs@^4.2.0": "4.2.0",
     "npm:markdown-it@^14.1.0": "14.1.0",
-    "npm:zod@^3.24.2": "3.24.2"
+    "npm:zod@^3.24.3": "3.24.3"
   },
   "jsr": {
-    "@std/fs@1.0.11": {
-      "integrity": "ba674672693340c5ebdd018b4fe1af46cb08741f42b4c538154e97d217b55bdd",
+    "@std/fs@1.0.17": {
+      "integrity": "1c00c632677c1158988ef7a004cb16137f870aafdb8163b9dce86ec652f3952b",
       "dependencies": [
         "jsr:@std/path"
       ]
     },
-    "@std/path@1.0.8": {
-      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
+    "@std/path@1.0.9": {
+      "integrity": "260a49f11edd3db93dd38350bf9cd1b4d1366afa98e81b86167b4e3dd750129e"
     }
   },
   "npm": {
@@ -75,18 +75,18 @@
     "uc.micro@2.1.0": {
       "integrity": "sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A=="
     },
-    "zod@3.24.2": {
-      "integrity": "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="
+    "zod@3.24.3": {
+      "integrity": "sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg=="
     }
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/fs@^1.0.11",
-      "jsr:@std/path@^1.0.8",
+      "jsr:@std/fs@^1.0.17",
+      "jsr:@std/path@^1.0.9",
       "npm:@types/markdown-it@^14.1.2",
       "npm:markdown-it-highlightjs@^4.2.0",
       "npm:markdown-it@^14.1.0",
-      "npm:zod@^3.24.2"
+      "npm:zod@^3.24.3"
     ]
   }
 }

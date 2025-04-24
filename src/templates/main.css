@@ -1,11 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
 :root {
   color-scheme: dark;
+  --base-font-size: 20px;
+
+  @media (min-width: 481px) {
+    --base-font-size: 24px;
+  }
+
+  @media (min-width: 769px) {
+    --base-font-size: 28px;
+  }
 }
 
 html {
   color: white;
-  font-size: 25px;
+  font-size: var(--base-font-size);
   font-family: "Architects Daughter", cursive;
 }
 
@@ -119,6 +128,7 @@ a:hover {
     list-style-type: none;
 
     input[type="checkbox"] {
+      color-scheme: light;
       margin-left: -1.4em;
     }
   }
@@ -133,4 +143,10 @@ hr {
   border: 0;
   height: 1px;
   background: var(--border-color);
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 1.5rem;
 }
