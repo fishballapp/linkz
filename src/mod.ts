@@ -1,6 +1,6 @@
 import { copy, ensureDir, ensureFile, existsSync } from "@std/fs";
 import { dirname, join, resolve, toFileUrl } from "@std/path";
-import { basename } from "@std/path/unstable-basename";
+import { basename } from "@std/path/basename";
 import { help } from "./help.ts";
 import { render } from "./render.ts";
 import { type Config, parseConfig } from "./types/Config.ts";

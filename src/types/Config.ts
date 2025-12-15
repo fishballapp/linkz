@@ -38,7 +38,7 @@ export const parseConfig = (
   if (!parsed.success) {
     return {
       success: false,
-      reasons: parsed.error.errors.map((e) => e.message),
+      reasons: z.treeifyError(parsed.error).errors,
     };
   }
 
