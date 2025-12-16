@@ -24,10 +24,7 @@ body {
 
 .bg {
   position: fixed;
-  width: 100lvw;
-  height: 100lvh;
-  top: 0;
-  left: 0;
+  inset: 0;
   background: linear-gradient(0deg, rgb(189 119 133), rgb(114 89 255));
   z-index: -1;
 }
