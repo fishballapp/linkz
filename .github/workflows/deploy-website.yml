@@ -30,11 +30,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
+      - uses: actions/setup-node@v4
         with:
-          deno-version: v2.x # Run with latest stable Deno.
+          node-version: "24"
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --frozen-lockfile
       - name: Build
-        run: deno run -r -A jsr:@fishballpkg/linkz linkz.config.json -f
+        run: pnpm build:website
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

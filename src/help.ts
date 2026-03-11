@@ -1,30 +1,28 @@
 export const help = () => {
+  const cyan = '\x1b[36m';
+  const yellow = '\x1b[33m';
+  const white = '\x1b[37m';
+  const bold = '\x1b[1m';
+  const reset = '\x1b[0m';
+
   console.log(
     `
-  %cLinkz - Generate a Linktree-like static website
+  ${cyan}${bold}Linkz - Generate a Linktree-like static website${reset}
 
-  %cUsage:
-    %clinkz path/to/config.json
+  ${yellow}${bold}Usage:${reset}
+    ${white}linkz path/to/config.json${reset}
 
-  %cDescription:
+  ${yellow}${bold}Description:${reset}
     Generates a simple static website based on a JSON configuration file.
 
-  %cExample:
-    %clinkz links.json
+  ${yellow}${bold}Example:${reset}
+    ${white}linkz links.json${reset}
 
-  %cConfiguration File:
+  ${yellow}${bold}Configuration File:${reset}
     The JSON file should contain an array of links with titles and URLs.
 
-  %c⭐️ on Github:
+  ⭐️ on Github:
     https://github.com/fishballapp/linkz
   `,
-    "color: cyan; font-weight: bold;",
-    "color: yellow; font-weight: bold;",
-    "color: white;",
-    "color: yellow; font-weight: bold;",
-    "color: white;",
-    "color: white;",
-    "color: yellow; font-weight: bold;",
-    "color: white;",
   );
 };

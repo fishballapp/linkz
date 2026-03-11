@@ -49,7 +49,8 @@ body {
   padding: 2rem 1rem;
 }
 
-.profile, .links {
+.profile,
+.links {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,7 +109,8 @@ a:hover {
     font-size: inherit;
     border-collapse: collapse;
 
-    td, th {
+    td,
+    th {
       padding: 0.5rem;
       border: 1px solid var(--border-color);
     }
@@ -130,7 +132,8 @@ a:hover {
     }
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
   }
@@ -142,7 +145,8 @@ hr {
   background: var(--border-color);
 }
 
-ol, ul {
+ol,
+ul {
   margin: 0;
   padding: 0;
   padding-left: 1.5rem;

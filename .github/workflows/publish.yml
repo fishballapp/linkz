@@ -13,10 +13,14 @@ jobs:
       id-token: write
 
     steps:
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x # Run with latest stable Deno.
       - uses: actions/checkout@v4
-
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
       - name: Publish package
-        run: deno publish
+        run: pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

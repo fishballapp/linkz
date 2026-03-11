@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 // When updating config schema, please also update config-schema.json
 const ConfigSchema = z.object({
@@ -26,13 +26,15 @@ const DEFAULT_CONFIG: Partial<Config> = {
 
 export const parseConfig = (
   c: unknown,
-): {
-  success: true;
-  config: Config;
-} | {
-  success: false;
-  reasons: string[];
-} => {
+):
+  | {
+      success: true;
+      config: Config;
+    }
+  | {
+      success: false;
+      reasons: string[];
+    } => {
   const parsed = ConfigSchema.safeParse(c);
 
   if (!parsed.success) {
