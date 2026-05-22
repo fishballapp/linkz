@@ -4,7 +4,7 @@
   "description": "Generate a linktree-like static website from a JSON config.",
   "license": "MIT",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "files": [
     "README.md",
     "dist"

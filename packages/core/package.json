@@ -4,7 +4,7 @@
   "description": "Core library for linksite — generate a linktree-like static website.",
   "license": "MIT",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "files": [
     "README.md",
     "dist"
