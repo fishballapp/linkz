@@ -4,11 +4,11 @@
   "type": "module",
   "scripts": {
     "generate-schema": "node scripts/generate-schema.ts",
-    "build": "pnpm generate-schema && linkly build linkly.config.json -f"
+    "build": "pnpm generate-schema && linksite build linksite.config.json -f"
   },
   "dependencies": {
-    "@linkly/core": "workspace:*",
-    "linkly": "workspace:*",
+    "@linksite/core": "workspace:*",
+    "linksite": "workspace:*",
     "zod": "catalog:"
   }
 }

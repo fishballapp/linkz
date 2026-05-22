@@ -1,7 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ConfigSchema } from '@linkly/core';
+import { ConfigSchema } from '@linksite/core';
 import { z } from 'zod';
 
 const schema = {

@@ -14,7 +14,7 @@ export const ConfigSchema = z.object({
   poweredBy: z
     .boolean()
     .default(true)
-    .describe('Whether to show the "Powered by linkly" footer (default: true).'),
+    .describe('Whether to show the "Powered by linksite" footer (default: true).'),
   favicon: z
     .string()
     .optional()

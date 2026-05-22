@@ -1,8 +1,8 @@
 # 🚀 Exploring Markdown
 
-- [[See me on Github]](https://github.com/fishballapp/linkly/blob/main/apps/website/public/exploring-markdown.md)
+- [[See me on Github]](https://github.com/fishballapp/linksite/blob/main/apps/website/public/exploring-markdown.md)
 
-Here are some example markdown that is supported by Linkly.
+Here are some example markdown that is supported by Linksite.
 
 ## Links
 
@@ -12,7 +12,7 @@ Internal Links (absolute or relative paths) will not open in a new tab.
 
 External Links (starting with `https://` or `http://`) would open in a new tab.
 
-- [linkly](https://linkly.fishball.app/)
+- [linksite](https://linksite.fishball.app/)
 - [ycmjason](https://www.ycmjason.com/)
 
 URL like links are automatically linked

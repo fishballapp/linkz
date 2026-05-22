@@ -1,5 +1,5 @@
 {
-  "name": "linkly",
+  "name": "linksite",
   "author": "ycm.jason",
   "description": "Generate a linktree-like static website from a JSON config.",
   "license": "MIT",
@@ -11,17 +11,17 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/fishballapp/linkly/tree/main/packages/cli"
+    "url": "https://github.com/fishballapp/linksite/tree/main/packages/cli"
   },
   "bin": {
-    "linkly": "./src/bin/linkly.ts"
+    "linksite": "./src/bin/linksite.ts"
   },
   "publishConfig": {
     "provenance": true,
     "registry": "https://registry.npmjs.org",
     "access": "public",
     "bin": {
-      "linkly": "./dist/bin/linkly.mjs"
+      "linksite": "./dist/bin/linksite.mjs"
     }
   },
   "engines": {
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@clack/prompts": "catalog:",
-    "@linkly/core": "workspace:*",
+    "@linksite/core": "workspace:*",
     "@stricli/core": "catalog:",
     "picocolors": "catalog:"
   }

@@ -5,7 +5,7 @@
   "favicon": "logo.png",
   "profilePicture": "logo.png",
   "ga": "G-9R35HFWLR8",
-  "name": "Linkly",
+  "name": "Linksite",
   "stylesheets": ["usage.css"],
   "links": [
     {
@@ -18,11 +18,11 @@
     },
     {
       "title": "Github",
-      "href": "https://github.com/fishballapp/linkly"
+      "href": "https://github.com/fishballapp/linksite"
     },
     {
       "title": "npm",
-      "href": "https://www.npmjs.com/package/linkly"
+      "href": "https://www.npmjs.com/package/linksite"
     }
   ]
 }

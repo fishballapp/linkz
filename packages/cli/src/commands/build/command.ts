@@ -8,7 +8,7 @@ export const buildSiteCommand = buildCommand({
       parameters: [
         {
           parse: String,
-          brief: 'Path to the linkly config JSON file',
+          brief: 'Path to the linksite config JSON file',
           placeholder: 'config',
         },
       ],
@@ -24,6 +24,6 @@ export const buildSiteCommand = buildCommand({
     },
   },
   docs: {
-    brief: 'Build the static site from a linkly config file',
+    brief: 'Build the static site from a linksite config file',
   },
 });

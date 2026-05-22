@@ -1,6 +1,6 @@
 # Usage
 
-Linkly is a simple config-based static site generator.
+Linksite is a simple config-based static site generator.
 
 The aim is to generate a linktree-like website based on a configuration allowing
 you to deploy within minutes.
@@ -8,10 +8,10 @@ you to deploy within minutes.
 ## Easy as 1, 2, 3...
 
 1. Create a config (see
-   [example](https://github.com/fishballapp/linkly/blob/main/apps/website/linkly.config.json))
+   [example](https://github.com/fishballapp/linksite/blob/main/apps/website/linksite.config.json))
    ```jsonc
    {
-     "$schema": "https://linkly.fishball.app/config-schema.json",
+     "$schema": "https://linksite.fishball.app/config-schema.json",
      "outDir": "dist",
      "publicDir": "public",
 
@@ -19,7 +19,7 @@ you to deploy within minutes.
      "favicon": "logo.png",
      "profilePicture": "logo.png",
 
-     "name": "Linkly",
+     "name": "Linksite",
      "links": [
        {
          "title": "Usage",
@@ -27,30 +27,30 @@ you to deploy within minutes.
        },
        {
          "title": "Github",
-         "href": "https://github.com/fishballapp/linkly"
+         "href": "https://github.com/fishballapp/linksite"
        },
        {
          "title": "npm",
-         "href": "https://www.npmjs.com/package/linkly"
+         "href": "https://www.npmjs.com/package/linksite"
        }
      ]
    }
    ```
 2. Build the website
    ```bash
-   npx linkly build path/to/your/linkly.config.json
+   npx linksite build path/to/your/linksite.config.json
    ```
 3. Deploy `dist` (or whatever you set in `config.outDir`)!
 
 Check out our
-[continuous deployment](https://github.com/fishballapp/linkly/blob/main/.github/workflows/deploy-website.yml)
+[continuous deployment](https://github.com/fishballapp/linksite/blob/main/.github/workflows/deploy-website.yml)
 for inspiration too!
 
 ## Reference Projects
 
-Here are some open-source websites using Linkly which might give you some
+Here are some open-source websites using Linksite which might give you some
 inspiration on how to use it:
 
-- linkly.fishball.app [[Github]](https://github.com/fishballapp/linkly)
+- linksite.fishball.app [[Github]](https://github.com/fishballapp/linksite)
 - fishball.app [[Github]](https://github.com/fishballapp/fishball.app)
 - ycmjason.com [[Github]](https://github.com/ycmjason/ycmjason.com)

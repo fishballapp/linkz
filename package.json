@@ -1,5 +1,5 @@
 {
-  "name": "@linkly/monorepo",
+  "name": "@linksite/monorepo",
   "type": "module",
   "private": true,
   "license": "MIT",
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "pnpm -r --filter './packages/*' run build",
-    "dev": "pnpm -F linkly exec tsdown --watch",
+    "dev": "pnpm -F linksite exec tsdown --watch",
     "typecheck": "tsc -b",
     "check": "biome check && repojj check",
     "check:fix": "biome check --fix"

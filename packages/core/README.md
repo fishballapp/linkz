@@ -1,12 +1,12 @@
-# @linkly/core
+# @linksite/core
 
-Programmatic API powering the [`linkly`](https://www.npmjs.com/package/linkly) CLI.
+Programmatic API powering the [`linksite`](https://www.npmjs.com/package/linksite) CLI.
 
 ```ts
-import { buildSite, loadConfig } from '@linkly/core';
+import { buildSite, loadConfig } from '@linksite/core';
 
-const config = await loadConfig('./linkly.config.json');
+const config = await loadConfig('./linksite.config.json');
 const { files } = await buildSite(config, { cwd: process.cwd() });
 ```
 
-See https://linkly.fishball.app/usage for full documentation.
+See https://linksite.fishball.app/usage for full documentation.

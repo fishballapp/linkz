@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { confirm, isCancel } from '@clack/prompts';
-import { buildSite, loadConfig } from '@linkly/core';
+import { buildSite, loadConfig } from '@linksite/core';
 import pc from 'picocolors';
 
 const ensureDistOk = async (distDir: string, { force }: { force: boolean }): Promise<void> => {
@@ -47,5 +47,5 @@ export default async ({ force }: { force: boolean }, configFilePath: string): Pr
     }),
   );
 
-  console.log(`${pc.green('Your linkly website is ready at')} ${pc.cyan(distDir)}!`);
+  console.log(`${pc.green('Your linksite website is ready at')} ${pc.cyan(distDir)}!`);
 };

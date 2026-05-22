@@ -1,7 +1,7 @@
 {
-  "name": "@linkly/core",
+  "name": "@linksite/core",
   "author": "ycm.jason",
-  "description": "Core library for linkly — generate a linktree-like static website.",
+  "description": "Core library for linksite — generate a linktree-like static website.",
   "license": "MIT",
   "type": "module",
   "version": "0.0.0",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/fishballapp/linkly/tree/main/packages/core"
+    "url": "https://github.com/fishballapp/linksite/tree/main/packages/core"
   },
   "exports": {
     ".": "./src/index.ts"

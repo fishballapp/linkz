@@ -1,14 +1,14 @@
-# linkly
+# linksite
 
 A command-line tool to generate your own "linktree-like" website.
 
 ## Usage
 
 ```bash
-npx linkly build path/to/your/linkly.config.json
+npx linksite build path/to/your/linksite.config.json
 ```
 
-See https://linkly.fishball.app/usage for full documentation.
+See https://linksite.fishball.app/usage for full documentation.
 
 ## Author
 

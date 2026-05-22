@@ -71,10 +71,10 @@ importers:
 
   apps/website:
     dependencies:
-      '@linkly/core':
+      '@linksite/core':
         specifier: workspace:*
         version: link:../../packages/core
-      linkly:
+      linksite:
         specifier: workspace:*
         version: link:../../packages/cli
       zod:
@@ -86,7 +86,7 @@ importers:
       '@clack/prompts':
         specifier: 'catalog:'
         version: 1.4.0
-      '@linkly/core':
+      '@linksite/core':
         specifier: workspace:*
         version: link:../core
       '@stricli/core':
