@@ -1,0 +1,14 @@
+{
+  "name": "website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate-schema": "node scripts/generate-schema.ts",
+    "build": "pnpm generate-schema && linkly build linkly.config.json -f"
+  },
+  "dependencies": {
+    "@linkly/core": "workspace:*",
+    "linkly": "workspace:*",
+    "zod": "catalog:"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "linkly",
+  "author": "ycm.jason",
+  "description": "Generate a linktree-like static website from a JSON config.",
+  "license": "MIT",
+  "type": "module",
+  "version": "0.0.0",
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fishballapp/linkly/tree/main/packages/cli"
+  },
+  "bin": {
+    "linkly": "./src/bin/linkly.ts"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "bin": {
+      "linkly": "./dist/bin/linkly.mjs"
+    }
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "@clack/prompts": "catalog:",
+    "@linkly/core": "workspace:*",
+    "@stricli/core": "catalog:",
+    "picocolors": "catalog:"
+  }
+}

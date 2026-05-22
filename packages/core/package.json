@@ -1,0 +1,43 @@
+{
+  "name": "@linkly/core",
+  "author": "ycm.jason",
+  "description": "Core library for linkly — generate a linktree-like static website.",
+  "license": "MIT",
+  "type": "module",
+  "version": "0.0.0",
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fishballapp/linkly/tree/main/packages/core"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "publishConfig": {
+    "provenance": true,
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "tsdown && node scripts/copy-templates.mjs",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "marked": "catalog:",
+    "marked-highlight": "catalog:",
+    "shiki": "catalog:",
+    "zod": "catalog:"
+  }
+}

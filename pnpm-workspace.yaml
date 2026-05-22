@@ -1,0 +1,25 @@
+packages:
+  - packages/*
+  - apps/*
+
+catalog:
+  '@biomejs/biome': ^2.4.15
+  '@clack/prompts': ^1.4.0
+  '@stricli/core': ^1.2.7
+  '@types/node': ^25.9.1
+  marked: ^18.0.4
+  marked-highlight: ^2.2.4
+  shiki: ^4.1.0
+  picocolors: ^1.1.1
+  repojj: ^2026.1.35
+  tsdown: ^0.22.0
+  type-fest: ^5.6.0
+  typescript: ^6.0.3
+  zod: ^4.4.3
+
+catalogMode: strict
+
+cleanupUnusedCatalogs: true
+
+allowBuilds:
+  esbuild: true

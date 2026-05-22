@@ -1,0 +1,28 @@
+{
+  "$schema": "./public/config-schema.json",
+  "outDir": "dist",
+  "publicDir": "public",
+  "favicon": "logo.png",
+  "profilePicture": "logo.png",
+  "ga": "G-9R35HFWLR8",
+  "name": "Linkly",
+  "stylesheets": ["usage.css"],
+  "links": [
+    {
+      "title": "Usage",
+      "href": "/usage"
+    },
+    {
+      "title": "Simple Markdown Guide",
+      "href": "/exploring-markdown"
+    },
+    {
+      "title": "Github",
+      "href": "https://github.com/fishballapp/linkly"
+    },
+    {
+      "title": "npm",
+      "href": "https://www.npmjs.com/package/linkly"
+    }
+  ]
+}

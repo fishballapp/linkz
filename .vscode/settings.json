@@ -1,0 +1,16 @@
+{
+  "deno.enable": false,
+  "eslint.enable": false,
+  "prettier.enable": false,
+  "biome.enabled": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.markdownlint": "explicit",
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "git.ignoreLimitWarning": true,
+  "js/ts.tsserver.experimental.enableProjectDiagnostics": true,
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
+}

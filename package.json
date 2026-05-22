@@ -1,0 +1,25 @@
+{
+  "name": "@linkly/monorepo",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' run build",
+    "dev": "pnpm -F linkly exec tsdown --watch",
+    "typecheck": "tsc -b",
+    "check": "biome check && repojj check",
+    "check:fix": "biome check --fix"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:",
+    "@types/node": "catalog:",
+    "tsdown": "catalog:",
+    "repojj": "catalog:",
+    "type-fest": "catalog:",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@11.2.2+sha512.36e6621fad506178936455e70247b8808ef4ec25797a9f437a93281a020484e2607f6a469a22e982987c3dbb8866e3071514ab10a4a1749e06edcd1ec118436f"
+}

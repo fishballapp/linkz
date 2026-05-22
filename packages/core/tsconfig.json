@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "outDir": "node_modules/.tmp/types",
+    "tsBuildInfoFile": "node_modules/.tmp/tsconfig.tsbuildinfo"
+  }
+}
